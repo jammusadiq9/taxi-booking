@@ -25,8 +25,8 @@ const Dashboard = () => {
   const fetchBookings = async () => {
     try {
       const url = statusFilter
-        ? `http://localhost:5000/api/bookings?status=${statusFilter}`
-        : `http://localhost:5000/api/bookings`
+        ? `https://taxi-booking-backend-production.up.railway.app/api/bookings?status=${statusFilter}`
+        : `https://taxi-booking-backend-production.up.railway.app/api/bookings`
 
       const res = await axios.get(url, config)
       setBookings(res.data.bookings)
@@ -41,7 +41,7 @@ const Dashboard = () => {
   const fetchContacts = async () => {
     try {
       const res = await axios.get(
-        'http://localhost:5000/api/contact',
+        'https://taxi-booking-backend-production.up.railway.app/api/contact',
         config
       )
       setContacts(res.data.contacts)
@@ -67,7 +67,7 @@ const Dashboard = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/bookings/${id}`,
+        `https://taxi-booking-backend-production.up.railway.app/api/bookings/${id}`,
         { status },
         config
       )
@@ -84,7 +84,7 @@ const Dashboard = () => {
     if (!window.confirm('Delete this booking?')) return
     try {
       await axios.delete(
-        `http://localhost:5000/api/bookings/${id}`,
+        `https://taxi-booking-backend-production.up.railway.app/api/bookings/${id}`,
         config
       )
       fetchBookings()
@@ -99,7 +99,7 @@ const Dashboard = () => {
   const updateContactStatus = async (id, status) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/contact/${id}`,
+        `https://taxi-booking-backend-production.up.railway.app/api/contact/${id}`,
         { status },
         config
       )
@@ -116,7 +116,7 @@ const Dashboard = () => {
     if (!window.confirm('Delete this message?')) return
     try {
       await axios.delete(
-        `http://localhost:5000/api/contact/${id}`,
+        `https://taxi-booking-backend-production.up.railway.app/api/contact/${id}`,
         config
       )
       fetchContacts()

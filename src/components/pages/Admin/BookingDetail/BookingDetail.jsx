@@ -21,7 +21,7 @@ const BookingDetail = () => {
   const fetchBooking = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/bookings/${id}`,
+        `https://taxi-booking-backend-production.up.railway.app/api/bookings/${id}`,
         config
       )
       setBooking(res.data.booking)
@@ -35,7 +35,7 @@ const BookingDetail = () => {
   const updateStatus = async (status) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/bookings/${id}`,
+        `https://taxi-booking-backend-production.up.railway.app/api/bookings/${id}`,
         { status },
         config
       )

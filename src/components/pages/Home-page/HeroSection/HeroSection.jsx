@@ -39,7 +39,7 @@ const HeroSection = () => {
     setSuccess(false)
 
     try {
-      await axios.post('http://localhost:5000/api/bookings', formData)
+      await axios.post('https://taxi-booking-backend-production.up.railway.app/api/bookings', formData)
       setSuccess(true)
       setFormData({
         enquiryType   : 'Booking',
