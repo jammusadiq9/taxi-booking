@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: #0D0D0D;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .navbar {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 22px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #F5C518;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  
+  .navbar-logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #F5C518;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .navbar-logo:hover {
+    transform: scale(1.05);
+  }
+  
+  .navbar-logo span {
+    color: #ffffff;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-links li {
+    list-style: none;
+  }
+  
+  .navbar-links a {
+    position: relative;
+    color: #b5b5b5;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 0;
+    letter-spacing: 0.5px;
+    
+    transition: all 0.25s ease;
+  }
+  
+  .navbar-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #F5C518;
+    transition: width 0.3s ease;
+  }
+  
+  .navbar-links a:hover {
+    color: #ffffff;
+  }
+  
+  .navbar-links a:hover::after {
+    width: 100%;
+  }
+  
+  .navbar-right {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  
+  .btn-whatsapp {
+    background: rgba(37, 211, 102, 0.08);
+    border: 1px solid #25D366;
+    color: #25D366;
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+  
+  .btn-whatsapp:hover {
+    background: #25D366;
+    color: #0b0b0b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(37, 211, 102, 0.25);
+  }
+  
+  .btn-phone {
+    background: linear-gradient(135deg, #F5C518, #e6b800);
+    color: #0b0b0b;
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+  
+  .btn-phone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 197, 24, 0.35);
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 14px 20px;
+    }
+  
+    .navbar-links {
+      display: none;
+    }
+  
+    .btn-whatsapp,
+    .btn-phone {
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+  }

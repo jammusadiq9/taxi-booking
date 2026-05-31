@@ -1,0 +1,121 @@
+.login-page {
+    min-height: 100vh;
+    background: #0D0D0D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  
+  .login-box {
+    background: #111111;
+    border: 1px solid #1e1e1e;
+    border-top: 3px solid #F5C518;
+    border-radius: 16px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 440px;
+  }
+  
+  /* LOGO */
+  .login-logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #F5C518;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  
+  .login-logo span {
+    color: #ffffff;
+  }
+  
+  /* TITLE */
+  .login-title {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  
+  .login-sub {
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  
+  /* ERROR */
+  .login-error {
+    background: rgba(255, 59, 59, 0.1);
+    border: 1px solid #ff3b3b;
+    color: #ff3b3b;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  /* FORM GROUP */
+  .login-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  
+  .login-group label {
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .login-group input {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    color: #ffffff;
+    padding: 13px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s ease;
+    width: 100%;
+  }
+  
+  .login-group input:focus {
+    border-color: #F5C518;
+  }
+  
+  .login-group input::placeholder {
+    color: #444;
+  }
+  
+  /* BUTTON */
+  .login-btn {
+    width: 100%;
+    background: #F5C518;
+    color: #000000;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+  }
+  
+  .login-btn:hover {
+    background: #e6b800;
+    transform: translateY(-2px);
+  }
+  
+  .login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
