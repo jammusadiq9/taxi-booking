@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
-import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp,
+  FaPhone,
+  FaMapMarkerAlt
+} from 'react-icons/fa'
 import './Footer.css'
 
 const Footer = () => {
@@ -16,7 +22,8 @@ const Footer = () => {
           </div>
 
           <p className="footer-tagline">
-            Hereford's trusted taxi service — available 24/7 for local rides, airport transfers and long distance journeys.
+            Hereford's trusted taxi service — available 24/7 for local rides,
+            airport transfers and long distance journeys.
           </p>
 
           {/* SOCIAL */}
@@ -67,8 +74,15 @@ const Footer = () => {
         <div className="footer-col">
           <h4>Contact Us</h4>
           <ul>
+
             <li>
-              <a href="tel:+447311694905">
+              <a
+                href="tel:+447311694905"
+                className="footer-contact-link"
+              >
+                <div className="footer-icon-wrap phone-wrap">
+                  <FaPhone />
+                </div>
                 +44 7311 694905
               </a>
             </li>
@@ -78,14 +92,25 @@ const Footer = () => {
                 href="https://wa.me/447311694905"
                 target="_blank"
                 rel="noreferrer"
+                className="footer-contact-link"
               >
+                <div className="footer-icon-wrap wa-wrap">
+                  <FaWhatsapp />
+                </div>
                 WhatsApp Us
               </a>
             </li>
 
-            <li>
-              <span>Hereford, UK</span>
+            <li className="footer-contact-link">
+              <div className="footer-icon-wrap loc-wrap">
+                <FaMapMarkerAlt />
+              </div>
+              <span>
+                7 Wincanton Close,<br />
+                Hereford, HR4 9TF
+              </span>
             </li>
+
           </ul>
         </div>
 
@@ -93,8 +118,7 @@ const Footer = () => {
 
       {/* BOTTOM */}
       <div className="footer-bottom">
-        <p>© 2025 RideIn Taxis. All rights reserved.</p>
-
+        <p>© 2025 Tay's Taxi. All rights reserved.</p>
         <div className="footer-policy">
           <a href="#">Privacy Policy</a>
           <span>|</span>

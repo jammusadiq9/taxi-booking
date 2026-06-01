@@ -253,75 +253,117 @@
   color: #888;
 }
 
-/* ACTION BUTTONS */
+/* ========================
+   ACTION BUTTONS — ICONS
+   ======================== */
 .action-btns {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.btn-confirm {
-  background: rgba(37, 211, 102, 0.1);
-  border: 1px solid #25D366;
-  color: #25D366;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12px;
+/* Base icon button */
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid;
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Tooltip */
+.icon-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000000;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 999;
+  letter-spacing: 0.3px;
+}
+
+/* Tooltip arrow */
+.icon-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #000000;
+}
+
+/* Show tooltip on hover */
+.icon-btn:hover .icon-tooltip {
+  opacity: 1;
+}
+
+/* VIEW */
+.btn-view {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+.btn-view:hover {
+  background: #3B82F6;
+  color: #fff;
+}
+
+/* CONFIRM */
+.btn-confirm {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: #25D366;
+  color: #25D366;
+}
 .btn-confirm:hover {
   background: #25D366;
   color: #000;
 }
 
+/* CANCEL */
 .btn-cancel {
   background: rgba(245, 158, 11, 0.1);
-  border: 1px solid #f59e0b;
+  border-color: #f59e0b;
   color: #f59e0b;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
-
 .btn-cancel:hover {
   background: #f59e0b;
   color: #000;
 }
 
+/* DELETE */
 .btn-delete {
   background: rgba(255, 59, 59, 0.1);
-  border: 1px solid #ff3b3b;
+  border-color: #ff3b3b;
   color: #ff3b3b;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
-
 .btn-delete:hover {
   background: #ff3b3b;
   color: #fff;
 }
-.btn-view {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid #3B82F6;
-    color: #3B82F6;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .btn-view:hover {
-    background: #3B82F6;
-    color: #fff;
-  }
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .dash-stats {
@@ -340,5 +382,10 @@
 
   .dash-header {
     padding: 14px 20px;
+  }
+
+  .icon-btn {
+    width: 30px;
+    height: 30px;
   }
 }

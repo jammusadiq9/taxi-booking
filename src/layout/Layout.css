@@ -4,8 +4,8 @@
     bottom: 25px;
     right: 25px;
   
-    width: 60px;
-    height: 60px;
+    width: 53px;
+    height: 53px;
   
     background: #25D366;
     color: white;
@@ -61,7 +61,53 @@
   .scroll-top:hover {
     transform: translateY(-3px);
   }
+  .call-float {
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    background: #1a1a1a;
+    border: 2px solid #F5C518;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F5C518;
+    text-decoration: none;
+    z-index: 9999;
+    font-size: 20px;
+    box-shadow: 0 4px 16px rgba(245, 197, 24, 0.3);
+    transition: all 0.3s ease;
+  }
   
+  .call-float:hover {
+    background: #F5C518;
+    color: #000;
+    transform: translateY(-3px);
+  }
+  
+  .scroll-top {
+    position: fixed;
+    bottom: 165px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: #F5C518;
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 9998;
+    box-shadow: 0 6px 20px rgba(245, 197, 24, 0.35);
+    transition: all 0.3s ease;
+  }
+  
+  .scroll-top:hover {
+    transform: translateY(-3px);
+  }
   @media (max-width: 768px) {
     .wa-float {
       width: 55px;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { FaWhatsapp } from 'react-icons/fa'
-
+import { FaPhone } from 'react-icons/fa'
 import Navbar from './Navbar/Navbar'
 import Footer from './Footer/Footer'
 
@@ -36,6 +36,14 @@ const Layout = () => {
       <Outlet />
 
       <Footer />
+      {/* CALL BUTTON */}
+
+ <a href="tel:+447311694905"
+  className="call-float"
+  title="Call Us"
+>
+  <FaPhone />
+</a>
 
       {/* WHATSAPP FLOAT BUTTON */}
       <a

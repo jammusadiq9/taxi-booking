@@ -12,157 +12,85 @@ const Dashboard = () => {
   const [loading,      setLoading     ] = useState(true)
 
   const navigate = useNavigate()
-
   const token = localStorage.getItem('adminToken')
+  const config = { headers: { Authorization: `Bearer ${token}` } }
 
-  const config = {
-    headers: { Authorization: `Bearer ${token}` }
-  }
-
-  // ========================
-  // FETCH BOOKINGS
-  // ========================
   const fetchBookings = async () => {
     try {
       const url = statusFilter
-        ? `https://taxi-booking-backend-production.up.railway.app/api/bookings?status=${statusFilter}`
-        : `https://taxi-booking-backend-production.up.railway.app/api/bookings`
-
+        ? `http://localhost:5000/api/bookings?status=${statusFilter}`
+        : `http://localhost:5000/api/bookings`
       const res = await axios.get(url, config)
       setBookings(res.data.bookings)
-    } catch (err) {
-      console.log(err)
-    }
+    } catch (err) { console.log(err) }
   }
 
-  // ========================
-  // FETCH CONTACTS
-  // ========================
   const fetchContacts = async () => {
     try {
-      const res = await axios.get(
-        'https://taxi-booking-backend-production.up.railway.app/api/contact',
-        config
-      )
+      const res = await axios.get('http://localhost:5000/api/contact', config)
       setContacts(res.data.contacts)
-    } catch (err) {
-      console.log(err)
-    } finally {
-      setLoading(false)
-    }
+    } catch (err) { console.log(err) }
+    finally { setLoading(false) }
   }
 
   useEffect(() => {
-    if (!token) {
-      navigate('/admin/login')
-      return
-    }
+    if (!token) { navigate('/admin/login'); return }
     fetchBookings()
     fetchContacts()
   }, [statusFilter])
 
-  // ========================
-  // UPDATE BOOKING STATUS
-  // ========================
   const updateStatus = async (id, status) => {
     try {
-      await axios.patch(
-        `https://taxi-booking-backend-production.up.railway.app/api/bookings/${id}`,
-        { status },
-        config
-      )
+      await axios.patch(`http://localhost:5000/api/bookings/${id}`, { status }, config)
       fetchBookings()
-    } catch (err) {
-      console.log(err)
-    }
+    } catch (err) { console.log(err) }
   }
 
-  // ========================
-  // DELETE BOOKING
-  // ========================
   const deleteBooking = async (id) => {
     if (!window.confirm('Delete this booking?')) return
     try {
-      await axios.delete(
-        `https://taxi-booking-backend-production.up.railway.app/api/bookings/${id}`,
-        config
-      )
+      await axios.delete(`http://localhost:5000/api/bookings/${id}`, config)
       fetchBookings()
-    } catch (err) {
-      console.log(err)
-    }
+    } catch (err) { console.log(err) }
   }
 
-  // ========================
-  // UPDATE CONTACT STATUS
-  // ========================
   const updateContactStatus = async (id, status) => {
     try {
-      await axios.patch(
-        `https://taxi-booking-backend-production.up.railway.app/api/contact/${id}`,
-        { status },
-        config
-      )
+      await axios.patch(`http://localhost:5000/api/contact/${id}`, { status }, config)
       fetchContacts()
-    } catch (err) {
-      console.log(err)
-    }
+    } catch (err) { console.log(err) }
   }
 
-  // ========================
-  // DELETE CONTACT
-  // ========================
   const deleteContact = async (id) => {
     if (!window.confirm('Delete this message?')) return
     try {
-      await axios.delete(
-        `https://taxi-booking-backend-production.up.railway.app/api/contact/${id}`,
-        config
-      )
+      await axios.delete(`http://localhost:5000/api/contact/${id}`, config)
       fetchContacts()
-    } catch (err) {
-      console.log(err)
-    }
+    } catch (err) { console.log(err) }
   }
 
-  // ========================
-  // LOGOUT
-  // ========================
   const logout = () => {
     localStorage.removeItem('adminToken')
     navigate('/admin/login')
   }
 
-  // ========================
-  // STATS
-  // ========================
   const total     = bookings.length
   const pending   = bookings.filter(b => b.status === 'pending').length
   const confirmed = bookings.filter(b => b.status === 'confirmed').length
   const cancelled = bookings.filter(b => b.status === 'cancelled').length
   const unread    = contacts.filter(c => c.status === 'unread').length
 
-  if (loading) {
-    return (
-      <div className="dashboard-loading">
-        Loading...
-      </div>
-    )
-  }
+  if (loading) return <div className="dashboard-loading">Loading...</div>
 
   return (
     <div className="dashboard">
 
       {/* HEADER */}
       <div className="dash-header">
-        <div className="dash-logo">
-          TAY<span>'S</span> TAXI
-        </div>
+        <div className="dash-logo">TAY<span>'S</span> TAXI</div>
         <div className="dash-header-right">
           <span className="dash-admin">Admin Panel</span>
-          <button className="dash-logout" onClick={logout}>
-            Logout
-          </button>
+          <button className="dash-logout" onClick={logout}>Logout</button>
         </div>
       </div>
 
@@ -205,22 +133,15 @@ const Dashboard = () => {
             onClick={() => setActiveTab('messages')}
           >
             Messages ({contacts.length})
-            {unread > 0 && (
-              <span className="unread-badge">{unread}</span>
-            )}
+            {unread > 0 && <span className="unread-badge">{unread}</span>}
           </button>
         </div>
 
         {/* BOOKINGS TAB */}
         {activeTab === 'bookings' && (
           <div className="dash-section">
-
-            {/* FILTER */}
             <div className="dash-filter">
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-              >
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                 <option value="">All Bookings</option>
                 <option value="pending">Pending</option>
                 <option value="confirmed">Confirmed</option>
@@ -228,7 +149,6 @@ const Dashboard = () => {
               </select>
             </div>
 
-            {/* TABLE */}
             <div className="dash-table-wrap">
               <table className="dash-table">
                 <thead>
@@ -242,16 +162,11 @@ const Dashboard = () => {
                     <th>Passengers</th>
                     <th>Status</th>
                     <th>Actions</th>
-                    
                   </tr>
                 </thead>
                 <tbody>
                   {bookings.length === 0 ? (
-                    <tr>
-                      <td colSpan="9" className="no-data">
-                        No bookings found
-                      </td>
-                    </tr>
+                    <tr><td colSpan="9" className="no-data">No bookings found</td></tr>
                   ) : (
                     bookings.map((b) => (
                       <tr key={b._id}>
@@ -263,41 +178,52 @@ const Dashboard = () => {
                         <td>{b.journeyTime}</td>
                         <td>{b.passengers}</td>
                         <td>
-                          <span className={`status-badge ${b.status}`}>
-                            {b.status}
-                          </span>
+                          <span className={`status-badge ${b.status}`}>{b.status}</span>
                         </td>
                         <td>
                           <div className="action-btns">
 
-                          <button
-      className="btn-view"
-      onClick={() => navigate(`/admin/booking/${b._id}`)}
-    >
-      View
-    </button>
-                            {b.status !== 'confirmed' && (
-                              <button
-                                className="btn-confirm"
-                                onClick={() => updateStatus(b._id, 'confirmed')}
-                              >
-                                Confirm
-                              </button>
-                            )}
-                            {b.status !== 'cancelled' && (
-                              <button
-                                className="btn-cancel"
-                                onClick={() => updateStatus(b._id, 'cancelled')}
-                              >
-                                Cancel
-                              </button>
-                            )}
-                            <button
-                              className="btn-delete"
-                              onClick={() => deleteBooking(b._id)}
-                            >
-                              Delete
+                            {/* VIEW */}
+                            <button className="icon-btn btn-view" onClick={() => navigate(`/admin/booking/${b._id}`)}>
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                              </svg>
+                              <span className="icon-tooltip">View</span>
                             </button>
+
+                            {/* CONFIRM */}
+                            {b.status !== 'confirmed' && (
+                              <button className="icon-btn btn-confirm" onClick={() => updateStatus(b._id, 'confirmed')}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span className="icon-tooltip">Confirm</span>
+                              </button>
+                            )}
+
+                            {/* CANCEL */}
+                            {b.status !== 'cancelled' && (
+                              <button className="icon-btn btn-cancel" onClick={() => updateStatus(b._id, 'cancelled')}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <line x1="18" y1="6" x2="6" y2="18"/>
+                                  <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                                <span className="icon-tooltip">Cancel</span>
+                              </button>
+                            )}
+
+                            {/* DELETE */}
+                            <button className="icon-btn btn-delete" onClick={() => deleteBooking(b._id)}>
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                                <path d="M10 11v6M14 11v6"/>
+                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                              </svg>
+                              <span className="icon-tooltip">Delete</span>
+                            </button>
+
                           </div>
                         </td>
                       </tr>
@@ -326,51 +252,51 @@ const Dashboard = () => {
                 </thead>
                 <tbody>
                   {contacts.length === 0 ? (
-                    <tr>
-                      <td colSpan="6" className="no-data">
-                        No messages found
-                      </td>
-                    </tr>
+                    <tr><td colSpan="6" className="no-data">No messages found</td></tr>
                   ) : (
                     contacts.map((c) => (
-                      <tr
-                        key={c._id}
-                        className={c.status === 'unread' ? 'unread-row' : ''}
-                      >
+                      <tr key={c._id} className={c.status === 'unread' ? 'unread-row' : ''}>
                         <td>{c.name}</td>
                         <td>{c.email}</td>
                         <td className="msg-text">{c.message}</td>
                         <td>
-                          <span className={`status-badge ${c.status}`}>
-                            {c.status}
-                          </span>
+                          <span className={`status-badge ${c.status}`}>{c.status}</span>
                         </td>
-                        <td>
-                          {new Date(c.createdAt).toLocaleDateString()}
-                        </td>
+                        <td>{new Date(c.createdAt).toLocaleDateString()}</td>
                         <td>
                           <div className="action-btns">
+
+                            {/* MARK READ */}
                             {c.status === 'unread' ? (
-                              <button
-                                className="btn-confirm"
-                                onClick={() => updateContactStatus(c._id, 'read')}
-                              >
-                                Mark Read
+                              <button className="icon-btn btn-confirm" onClick={() => updateContactStatus(c._id, 'read')}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                  <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <span className="icon-tooltip">Mark Read</span>
                               </button>
                             ) : (
-                              <button
-                                className="btn-cancel"
-                                onClick={() => updateContactStatus(c._id, 'unread')}
-                              >
-                                Mark Unread
+                              /* MARK UNREAD */
+                              <button className="icon-btn btn-cancel" onClick={() => updateContactStatus(c._id, 'unread')}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                  <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                                </svg>
+                                <span className="icon-tooltip">Mark Unread</span>
                               </button>
                             )}
-                            <button
-                              className="btn-delete"
-                              onClick={() => deleteContact(c._id)}
-                            >
-                              Delete
+
+                            {/* DELETE */}
+                            <button className="icon-btn btn-delete" onClick={() => deleteContact(c._id)}>
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                                <path d="M10 11v6M14 11v6"/>
+                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                              </svg>
+                              <span className="icon-tooltip">Delete</span>
                             </button>
+
                           </div>
                         </td>
                       </tr>

@@ -17,7 +17,7 @@ const AboutSection = () => {
 
           {/* BADGE ON IMAGE */}
           <div className="about-img-badge">
-            <span className="badge-num">1+</span>
+            <span className="badge-num">25+</span>
             <span className="badge-text">Years of Experience</span>
           </div>
         </div>
