@@ -130,14 +130,20 @@
     .navbar {
       padding: 14px 20px;
     }
+    .navbar-logo{
+      font-size: 22px;
+    }
   
     .navbar-links {
       display: none;
     }
   
-    .btn-whatsapp,
+    .btn-whatsapp{
+      display: none;
+    }
     .btn-phone {
       padding: 8px 14px;
       font-size: 13px;
     }
+
   }

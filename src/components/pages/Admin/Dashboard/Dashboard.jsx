@@ -170,17 +170,17 @@ const Dashboard = () => {
                   ) : (
                     bookings.map((b) => (
                       <tr key={b._id}>
-                        <td>{b.firstName} {b.lastName}</td>
-                        <td>{b.phone}</td>
-                        <td>{b.pickupAddress}</td>
-                        <td>{b.dropoffAddress}</td>
-                        <td>{b.journeyDate}</td>
-                        <td>{b.journeyTime}</td>
-                        <td>{b.passengers}</td>
-                        <td>
+                        <td data-label="Customer">{b.firstName} {b.lastName}</td>
+                        <td data-label="Phone">{b.phone}</td>
+                        <td data-label="Pickup">{b.pickupAddress}</td>
+                        <td data-label="Dropoff">{b.dropoffAddress}</td>
+                        <td data-label="Date">{b.journeyDate}</td>
+                        <td data-label="Time">{b.journeyTime}</td>
+                        <td data-label="Passengers">{b.passengers}</td>
+                        <td data-label="Status">
                           <span className={`status-badge ${b.status}`}>{b.status}</span>
                         </td>
-                        <td>
+                        <td data-label="Actions">
                           <div className="action-btns">
 
                             {/* VIEW */}
@@ -256,14 +256,14 @@ const Dashboard = () => {
                   ) : (
                     contacts.map((c) => (
                       <tr key={c._id} className={c.status === 'unread' ? 'unread-row' : ''}>
-                        <td>{c.name}</td>
-                        <td>{c.email}</td>
-                        <td className="msg-text">{c.message}</td>
-                        <td>
+                        <td data-label="Name">{c.name}</td>
+                        <td data-label="Email">{c.email}</td>
+                        <td data-label="Message" className="msg-text">{c.message}</td>
+                        <td data-label="Status">
                           <span className={`status-badge ${c.status}`}>{c.status}</span>
                         </td>
-                        <td>{new Date(c.createdAt).toLocaleDateString()}</td>
-                        <td>
+                        <td data-label="Date">{new Date(c.createdAt).toLocaleDateString()}</td>
+                        <td data-label="Actions">
                           <div className="action-btns">
 
                             {/* MARK READ */}

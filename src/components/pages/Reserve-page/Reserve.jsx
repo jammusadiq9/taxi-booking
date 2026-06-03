@@ -42,6 +42,18 @@ const Reserve = () => {
     try {
       await axios.post('http://localhost:5000/api/bookings', formData)
       setSuccess(true)
+         setFormData({
+        enquiryType   : 'Booking',
+        journeyDate   : '',
+        journeyTime   : '',
+        passengers    : '1',
+        pickupAddress : '',
+        dropoffAddress: '',
+        firstName     : '',
+        lastName      : '',
+        phone         : '',
+        email         : ''
+      })
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
       setError('Something went wrong. Please try again.')

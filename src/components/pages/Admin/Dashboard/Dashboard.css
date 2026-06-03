@@ -28,7 +28,7 @@
 }
 
 .dash-logo {
-  font-size: 22px;
+  font-size: 38px;
   font-weight: 700;
   color: #F5C518;
   letter-spacing: 2px;
@@ -375,9 +375,12 @@
   .dash-content {
     padding: 20px;
   }
+  .dash-logo{
+    font-size: 22px;
+  }
 
   .dash-stats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .dash-header {
@@ -387,5 +390,167 @@
   .icon-btn {
     width: 30px;
     height: 30px;
+  }
+  .dash-stats>div{
+padding: 5px;
+  }
+  .stat-num{
+    font-size: 25px;
+    margin: 0px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dash-content {
+    padding: 18px 14px;
+  }
+
+  .dash-header {
+    gap: 12px;
+  }
+
+  .dash-admin {
+    display: none;
+  }
+
+  .dash-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card.unread {
+    grid-column: 1 / -1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .dash-tabs {
+    gap: 8px;
+  }
+
+  .dash-tab {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .dash-filter select {
+    width: 100%;
+  }
+
+  .dash-table-wrap {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .dash-table,
+  .dash-table thead,
+  .dash-table tbody,
+  .dash-table tr,
+  .dash-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .dash-table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .dash-table thead {
+    display: none;
+  }
+
+  .dash-table tbody {
+    display: grid;
+    gap: 14px;
+  }
+
+  .dash-table tbody tr {
+    background: #111111;
+    border: 1px solid #242424;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .dash-table tbody tr:hover {
+    background: #111111;
+  }
+
+  .dash-table td {
+    display: grid;
+    grid-template-columns: minmax(86px, 34%) minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    padding: 9px 0;
+    border-top: 1px solid #1f1f1f;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .dash-table td:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .dash-table td::before {
+    content: attr(data-label);
+    color: #F5C518;
+    font-weight: 600;
+  }
+
+  .dash-table td[data-label="Customer"],
+  .dash-table td[data-label="Name"] {
+    font-size: 15px;
+  }
+
+  .dash-table td[data-label="Customer"]::before,
+  .dash-table td[data-label="Name"]::before {
+    align-self: center;
+  }
+
+  .dash-table td[data-label="Actions"] {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-bottom: 0;
+  }
+
+  .dash-table td[data-label="Actions"]::before {
+    content: none;
+  }
+
+  .action-btns {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .msg-text {
+    max-width: none;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .no-data {
+    display: block !important;
+    border: 1px solid #242424;
+    border-radius: 8px;
+    background: #111111;
+  }
+
+  .no-data::before {
+    content: none !important;
   }
 }

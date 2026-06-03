@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './BookingDetail.css'
+import { FaCheck, FaTimes } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa'
 
 const BookingDetail = () => {
 
@@ -53,12 +55,13 @@ const BookingDetail = () => {
 
       {/* HEADER */}
       <div className="bd-header">
-        <button
-          className="bd-back"
-          onClick={() => navigate('/admin/dashboard')}
-        >
-          ← Back to Dashboard
-        </button>
+      <button
+  className="bd-back"
+  onClick={() => navigate('/admin/dashboard')}
+  title="Back to Dashboard"
+>
+  <FaArrowLeft />
+</button>
         <div className="bd-logo">TAY'S TAXI — Admin</div>
         <button
           className="bd-logout"
@@ -86,23 +89,26 @@ const BookingDetail = () => {
               {booking.status}
             </span>
             <div className="bd-action-btns">
-              {booking.status !== 'confirmed' && (
-                <button
-                  className="bd-btn green"
-                  onClick={() => updateStatus('confirmed')}
-                >
-                  Confirm
-                </button>
-              )}
-              {booking.status !== 'cancelled' && (
-                <button
-                  className="bd-btn yellow"
-                  onClick={() => updateStatus('cancelled')}
-                >
-                  Cancel
-                </button>
-              )}
-            </div>
+  {booking.status !== 'confirmed' && (
+    <button
+      className="bd-btn green"
+      onClick={() => updateStatus('confirmed')}
+      title="Confirm Booking"
+    >
+      <FaCheck />
+    </button>
+  )}
+
+  {booking.status !== 'cancelled' && (
+    <button
+      className="bd-btn yellow"
+      onClick={() => updateStatus('cancelled')}
+      title="Cancel Booking"
+    >
+      <FaTimes />
+    </button>
+  )}
+</div>
           </div>
         </div>
 
