@@ -39,7 +39,7 @@ const HeroSection = () => {
     setSuccess(false)
 
     try {
-      await axios.post('http://localhost:5000/api/bookings', formData)
+      await axios.post('https://test.mondabrothers.com/api/bookings', formData)
       setSuccess(true)
       setFormData({
         enquiryType   : 'Booking',
