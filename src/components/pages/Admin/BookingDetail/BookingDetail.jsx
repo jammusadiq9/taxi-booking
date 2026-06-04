@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './BookingDetail.css'
-import { FaCheck, FaTimes } from 'react-icons/fa'
-import { FaArrowLeft } from 'react-icons/fa'
+import { FaCheck, FaTimes, FaArrowLeft } from 'react-icons/fa'
 
 const BookingDetail = () => {
 
-  const [booking, setBooking] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [booking,          setBooking         ] = useState(null)
+  const [loading,          setLoading         ] = useState(true)
+  const [showCancelModal,  setShowCancelModal ] = useState(false)
+  const [cancelReason,     setCancelReason    ] = useState('')
 
   const { id }   = useParams()
   const navigate = useNavigate()
@@ -22,10 +23,7 @@ const BookingDetail = () => {
 
   const fetchBooking = async () => {
     try {
-      const res = await axios.get(
-        `https://test.mondabrothers.com/api/bookings/${id}`,
-        config
-      )
+      const res = await axios.get(`https://test.mondabrothers.com/api/bookings/${id}`, config)
       setBooking(res.data.booking)
     } catch (err) {
       console.log(err)
@@ -34,13 +32,15 @@ const BookingDetail = () => {
     }
   }
 
-  const updateStatus = async (status) => {
+  const updateStatus = async (status, reason = '') => {
     try {
       await axios.patch(
         `https://test.mondabrothers.com/api/bookings/${id}`,
-        { status },
+        { status, cancelReason: reason },
         config
       )
+      setShowCancelModal(false)
+      setCancelReason('')
       fetchBooking()
     } catch (err) {
       console.log(err)
@@ -55,21 +55,11 @@ const BookingDetail = () => {
 
       {/* HEADER */}
       <div className="bd-header">
-      <button
-  className="bd-back"
-  onClick={() => navigate('/admin/dashboard')}
-  title="Back to Dashboard"
->
-  <FaArrowLeft />
-</button>
+        <button className="bd-back" onClick={() => navigate('/admin/dashboard')} title="Back to Dashboard">
+          <FaArrowLeft />
+        </button>
         <div className="bd-logo">TAY'S TAXI — Admin</div>
-        <button
-          className="bd-logout"
-          onClick={() => {
-            localStorage.removeItem('adminToken')
-            navigate('/admin/login')
-          }}
-        >
+        <button className="bd-logout" onClick={() => { localStorage.removeItem('adminToken'); navigate('/admin/login') }}>
           Logout
         </button>
       </div>
@@ -80,42 +70,28 @@ const BookingDetail = () => {
         <div className="bd-top">
           <div>
             <h2 className="bd-title">Booking Detail</h2>
-            <p className="bd-date">
-              Received: {new Date(booking.createdAt).toLocaleString()}
-            </p>
+            <p className="bd-date">Received: {new Date(booking.createdAt).toLocaleString()}</p>
           </div>
           <div className="bd-top-right">
-            <span className={`bd-status ${booking.status}`}>
-              {booking.status}
-            </span>
+            <span className={`bd-status ${booking.status}`}>{booking.status}</span>
             <div className="bd-action-btns">
-  {booking.status !== 'confirmed' && (
-    <button
-      className="bd-btn green"
-      onClick={() => updateStatus('confirmed')}
-      title="Confirm Booking"
-    >
-      <FaCheck />
-    </button>
-  )}
-
-  {booking.status !== 'cancelled' && (
-    <button
-      className="bd-btn yellow"
-      onClick={() => updateStatus('cancelled')}
-      title="Cancel Booking"
-    >
-      <FaTimes />
-    </button>
-  )}
-</div>
+              {booking.status !== 'confirmed' && (
+                <button className="bd-btn green" onClick={() => updateStatus('confirmed')} title="Confirm Booking">
+                  <FaCheck />
+                </button>
+              )}
+              {booking.status !== 'cancelled' && (
+                <button className="bd-btn yellow" onClick={() => setShowCancelModal(true)} title="Cancel Booking">
+                  <FaTimes />
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
         {/* GRID */}
         <div className="bd-grid">
 
-          {/* CUSTOMER INFO */}
           <div className="bd-card">
             <h3 className="bd-card-title">Customer Information</h3>
             <div className="bd-rows">
@@ -134,7 +110,6 @@ const BookingDetail = () => {
             </div>
           </div>
 
-          {/* JOURNEY INFO */}
           <div className="bd-card">
             <h3 className="bd-card-title">Journey Information</h3>
             <div className="bd-rows">
@@ -157,7 +132,6 @@ const BookingDetail = () => {
             </div>
           </div>
 
-          {/* ADDRESSES */}
           <div className="bd-card">
             <h3 className="bd-card-title">Addresses</h3>
             <div className="bd-rows">
@@ -176,7 +150,6 @@ const BookingDetail = () => {
             </div>
           </div>
 
-          {/* EXTRA INFO */}
           <div className="bd-card">
             <h3 className="bd-card-title">Extra Information</h3>
             <div className="bd-rows">
@@ -198,11 +171,59 @@ const BookingDetail = () => {
                 <span className="bd-label">Promo Code</span>
                 <span className="bd-value">{booking.promoCode || '—'}</span>
               </div>
+              {booking.cancelReason && (
+                <div className="bd-row">
+                  <span className="bd-label">Cancel Reason</span>
+                  <span className="bd-value" style={{ color: '#ef4444' }}>{booking.cancelReason}</span>
+                </div>
+              )}
             </div>
           </div>
 
         </div>
       </div>
+
+      {/* CANCEL MODAL */}
+      {showCancelModal && (
+        <div style={{
+          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.45)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999
+        }}>
+          <div style={{
+            background: '#fff', borderRadius: '10px', padding: '24px',
+            width: '360px', boxShadow: '0 4px 20px rgba(0,0,0,0.15)'
+          }}>
+            <h3 style={{ margin: '0 0 8px', fontSize: '16px', color: '#111' }}>Cancel Booking</h3>
+            <p style={{ margin: '0 0 16px', fontSize: '13px', color: '#666' }}>Reason for cancellation (customer ko email jayegi).</p>
+            <textarea
+              rows={3}
+              placeholder="Enter reason..."
+              value={cancelReason}
+              onChange={(e) => setCancelReason(e.target.value)}
+              style={{
+                width: '100%', padding: '10px', fontSize: '13px',
+                border: '1px solid #ddd', borderRadius: '6px',
+                resize: 'none', boxSizing: 'border-box'
+              }}
+            />
+            <div style={{ display: 'flex', gap: '8px', marginTop: '16px', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => { setShowCancelModal(false); setCancelReason('') }}
+                style={{ padding: '8px 16px', fontSize: '13px', background: '#eee', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
+              >
+                Back
+              </button>
+              <button
+                onClick={() => updateStatus('cancelled', cancelReason)}
+                style={{ padding: '8px 16px', fontSize: '13px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
+              >
+                Confirm Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

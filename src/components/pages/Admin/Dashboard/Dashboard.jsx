@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [activeTab,    setActiveTab   ] = useState('bookings')
   const [statusFilter, setStatusFilter] = useState('')
   const [loading,      setLoading     ] = useState(true)
+  const [cancelInfo,   setCancelInfo  ] = useState({ id: null, reason: '' })
 
   const navigate = useNavigate()
   const token = localStorage.getItem('adminToken')
@@ -39,9 +40,14 @@ const Dashboard = () => {
     fetchContacts()
   }, [statusFilter])
 
-  const updateStatus = async (id, status) => {
+  const updateStatus = async (id, status, reason = '') => {
     try {
-      await axios.patch(`https://test.mondabrothers.com/api/bookings/${id}`, { status }, config)
+      await axios.patch(
+        `https://test.mondabrothers.com/api/bookings/${id}`,
+        { status, cancelReason: reason },
+        config
+      )
+      setCancelInfo({ id: null, reason: '' })
       fetchBookings()
     } catch (err) { console.log(err) }
   }
@@ -122,16 +128,10 @@ const Dashboard = () => {
 
         {/* TABS */}
         <div className="dash-tabs">
-          <button
-            className={`dash-tab ${activeTab === 'bookings' ? 'active' : ''}`}
-            onClick={() => setActiveTab('bookings')}
-          >
+          <button className={`dash-tab ${activeTab === 'bookings' ? 'active' : ''}`} onClick={() => setActiveTab('bookings')}>
             Bookings ({total})
           </button>
-          <button
-            className={`dash-tab ${activeTab === 'messages' ? 'active' : ''}`}
-            onClick={() => setActiveTab('messages')}
-          >
+          <button className={`dash-tab ${activeTab === 'messages' ? 'active' : ''}`} onClick={() => setActiveTab('messages')}>
             Messages ({contacts.length})
             {unread > 0 && <span className="unread-badge">{unread}</span>}
           </button>
@@ -204,13 +204,39 @@ const Dashboard = () => {
 
                             {/* CANCEL */}
                             {b.status !== 'cancelled' && (
-                              <button className="icon-btn btn-cancel" onClick={() => updateStatus(b._id, 'cancelled')}>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                  <line x1="18" y1="6" x2="6" y2="18"/>
-                                  <line x1="6" y1="6" x2="18" y2="18"/>
-                                </svg>
-                                <span className="icon-tooltip">Cancel</span>
-                              </button>
+                              <>
+                                <button className="icon-btn btn-cancel" onClick={() => setCancelInfo({ id: b._id, reason: '' })}>
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                  </svg>
+                                  <span className="icon-tooltip">Cancel</span>
+                                </button>
+
+                                {cancelInfo.id === b._id && (
+                                  <div style={{ marginTop: '8px', display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+                                    <input
+                                      type="text"
+                                      placeholder="Reason..."
+                                      value={cancelInfo.reason}
+                                      onChange={(e) => setCancelInfo({ ...cancelInfo, reason: e.target.value })}
+                                      style={{ fontSize: '12px', padding: '4px 8px', border: '1px solid #ddd', borderRadius: '4px', width: '150px' }}
+                                    />
+                                    <button
+                                      onClick={() => updateStatus(b._id, 'cancelled', cancelInfo.reason)}
+                                      style={{ fontSize: '12px', padding: '4px 10px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                                    >
+                                      Send
+                                    </button>
+                                    <button
+                                      onClick={() => setCancelInfo({ id: null, reason: '' })}
+                                      style={{ fontSize: '12px', padding: '4px 8px', background: '#eee', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                                    >
+                                      ✕
+                                    </button>
+                                  </div>
+                                )}
+                              </>
                             )}
 
                             {/* DELETE */}
@@ -265,8 +291,6 @@ const Dashboard = () => {
                         <td data-label="Date">{new Date(c.createdAt).toLocaleDateString()}</td>
                         <td data-label="Actions">
                           <div className="action-btns">
-
-                            {/* MARK READ */}
                             {c.status === 'unread' ? (
                               <button className="icon-btn btn-confirm" onClick={() => updateContactStatus(c._id, 'read')}>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -276,7 +300,6 @@ const Dashboard = () => {
                                 <span className="icon-tooltip">Mark Read</span>
                               </button>
                             ) : (
-                              /* MARK UNREAD */
                               <button className="icon-btn btn-cancel" onClick={() => updateContactStatus(c._id, 'unread')}>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                   <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
@@ -285,8 +308,6 @@ const Dashboard = () => {
                                 <span className="icon-tooltip">Mark Unread</span>
                               </button>
                             )}
-
-                            {/* DELETE */}
                             <button className="icon-btn btn-delete" onClick={() => deleteContact(c._id)}>
                               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <polyline points="3 6 5 6 21 6"/>
@@ -296,7 +317,6 @@ const Dashboard = () => {
                               </svg>
                               <span className="icon-tooltip">Delete</span>
                             </button>
-
                           </div>
                         </td>
                       </tr>
