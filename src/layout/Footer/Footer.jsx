@@ -18,7 +18,7 @@ const Footer = () => {
         {/* BRAND */}
         <div className="footer-brand">
           <div className="footer-logo">
-            TAY<span>'S</span> TAXI
+            MAZI<span>'S</span> TAXI
           </div>
 
           <p className="footer-tagline">
@@ -118,7 +118,7 @@ const Footer = () => {
 
       {/* BOTTOM */}
       <div className="footer-bottom">
-        <p>© 2025 Tay's Taxi. All rights reserved.</p>
+        <p>© 2025 Mazi's Taxi. All rights reserved.</p>
         <div className="footer-policy">
           <a href="#">Privacy Policy</a>
           <span>|</span>

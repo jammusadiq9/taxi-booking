@@ -79,7 +79,7 @@ const MapSection = () => {
         {/* RIGHT — MAP */}
         <div className="map-embed">
         <iframe
-  title="Tay's Taxi Location"
+  title="Mazi's Taxi Location"
   src="https://maps.google.com/maps?q=7+Wincanton+Close+Hereford+HR4+9TF&output=embed"
   width="100%"
   height="100%"

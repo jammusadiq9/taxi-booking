@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import './HeroSection.css'
-import taxiImg from '../../../../assets/taxi.jpg'
+import taxiImg from '../../../../assets/why choose/taxi.png'
 
 const HeroSection = () => {
 
@@ -39,7 +39,7 @@ const HeroSection = () => {
     setSuccess(false)
 
     try {
-      await axios.post('https://test.mondabrothers.com/api/bookings', formData)
+      await axios.post('http://localhost:5000/api/bookings', formData)
       setSuccess(true)
       setFormData({
         enquiryType   : 'Booking',

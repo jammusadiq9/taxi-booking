@@ -50,7 +50,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        TAY<span>'S</span> TAXI
+        MAZI<span>'S</span> TAXI
       </div>
 
       <ul className="navbar-links">

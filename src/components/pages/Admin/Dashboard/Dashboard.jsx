@@ -19,8 +19,8 @@ const Dashboard = () => {
   const fetchBookings = async () => {
     try {
       const url = statusFilter
-        ? `https://test.mondabrothers.com/api/bookings?status=${statusFilter}`
-        : `https://test.mondabrothers.com/api/bookings`
+        ? `http://localhost:5000/api/bookings?status=${statusFilter}`
+        : `http://localhost:5000/api/bookings`
       const res = await axios.get(url, config)
       setBookings(res.data.bookings)
     } catch (err) { console.log(err) }
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const fetchContacts = async () => {
     try {
-      const res = await axios.get('https://test.mondabrothers.com/api/contact', config)
+      const res = await axios.get('http://localhost:5000/api/contact', config)
       setContacts(res.data.contacts)
     } catch (err) { console.log(err) }
     finally { setLoading(false) }
@@ -43,7 +43,7 @@ const Dashboard = () => {
   const updateStatus = async (id, status, reason = '') => {
     try {
       await axios.patch(
-        `https://test.mondabrothers.com/api/bookings/${id}`,
+        `http://localhost:5000/api/bookings/${id}`,
         { status, cancelReason: reason },
         config
       )
@@ -55,14 +55,14 @@ const Dashboard = () => {
   const deleteBooking = async (id) => {
     if (!window.confirm('Delete this booking?')) return
     try {
-      await axios.delete(`https://test.mondabrothers.com/api/bookings/${id}`, config)
+      await axios.delete(`http://localhost:5000/api/bookings/${id}`, config)
       fetchBookings()
     } catch (err) { console.log(err) }
   }
 
   const updateContactStatus = async (id, status) => {
     try {
-      await axios.patch(`https://test.mondabrothers.com/api/contact/${id}`, { status }, config)
+      await axios.patch(`http://localhost:5000/api/contact/${id}`, { status }, config)
       fetchContacts()
     } catch (err) { console.log(err) }
   }
@@ -70,7 +70,7 @@ const Dashboard = () => {
   const deleteContact = async (id) => {
     if (!window.confirm('Delete this message?')) return
     try {
-      await axios.delete(`https://test.mondabrothers.com/api/contact/${id}`, config)
+      await axios.delete(`http://localhost:5000/api/contact/${id}`, config)
       fetchContacts()
     } catch (err) { console.log(err) }
   }
@@ -93,7 +93,7 @@ const Dashboard = () => {
 
       {/* HEADER */}
       <div className="dash-header">
-        <div className="dash-logo">TAY<span>'S</span> TAXI</div>
+        <div className="dash-logo">MAZI<span>'S</span> TAXI</div>
         <div className="dash-header-right">
           <span className="dash-admin">Admin Panel</span>
           <button className="dash-logout" onClick={logout}>Logout</button>

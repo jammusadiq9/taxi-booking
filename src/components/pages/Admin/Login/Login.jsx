@@ -26,7 +26,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        'https://test.mondabrothers.com/api/admin/login',
+        'http://localhost:5000/api/admin/login',
         formData
       )
 

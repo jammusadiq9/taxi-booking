@@ -23,19 +23,19 @@ const BookingDetail = () => {
 
   const fetchBooking = async () => {
     try {
-      const res = await axios.get(`https://test.mondabrothers.com/api/bookings/${id}`, config)
+      const res = await axios.get(`http://localhost:5000/api/bookings/${id}`, config)
       setBooking(res.data.booking)
     } catch (err) {
       console.log(err)
     } finally {
-      setLoading(false)
+      setLoading(false) 
     }
   }
 
   const updateStatus = async (status, reason = '') => {
     try {
       await axios.patch(
-        `https://test.mondabrothers.com/api/bookings/${id}`,
+        `http://localhost:5000/api/bookings/${id}`,
         { status, cancelReason: reason },
         config
       )
@@ -58,7 +58,7 @@ const BookingDetail = () => {
         <button className="bd-back" onClick={() => navigate('/admin/dashboard')} title="Back to Dashboard">
           <FaArrowLeft />
         </button>
-        <div className="bd-logo">TAY'S TAXI — Admin</div>
+        <div className="bd-logo">MAZI'S TAXI — Admin</div>
         <button className="bd-logout" onClick={() => { localStorage.removeItem('adminToken'); navigate('/admin/login') }}>
           Logout
         </button>
