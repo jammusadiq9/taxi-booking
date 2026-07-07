@@ -23,7 +23,7 @@ const BookingDetail = () => {
 
   const fetchBooking = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/bookings/${id}`, config)
+      const res = await axios.get(`https://test.mondabrothers.com/api/bookings/${id}`, config)
       setBooking(res.data.booking)
     } catch (err) {
       console.log(err)
@@ -35,7 +35,7 @@ const BookingDetail = () => {
   const updateStatus = async (status, reason = '') => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/bookings/${id}`,
+        `https://test.mondabrothers.com/api/bookings/${id}`,
         { status, cancelReason: reason },
         config
       )

@@ -27,7 +27,11 @@ const MapSection = () => {
 
               <div>
                 <h4>Location</h4>
-                <p>7 Wincanton Close,<br/>Hereford, HR4 9TF</p>
+                <p>
+                  25 Danny Lee Walk,
+                  <br />
+                  Hereford, HR4 7ST
+                </p>
               </div>
             </div>
 
@@ -36,8 +40,8 @@ const MapSection = () => {
 
               <div>
                 <h4>Phone</h4>
-                <a href="tel:+447311694905">
-                  +44 7311 694905
+                <a href="tel:+447885843111">
+                  +44 7885 843111
                 </a>
               </div>
             </div>
@@ -47,9 +51,8 @@ const MapSection = () => {
 
               <div>
                 <h4>WhatsApp</h4>
-
                 <a
-                  href="https://wa.me/447311694905"
+                  href="https://wa.me/447885843111"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -78,16 +81,16 @@ const MapSection = () => {
 
         {/* RIGHT — MAP */}
         <div className="map-embed">
-        <iframe
-  title="Mazi's Taxi Location"
-  src="https://maps.google.com/maps?q=7+Wincanton+Close+Hereford+HR4+9TF&output=embed"
-  width="100%"
-  height="100%"
-  style={{ border: 0 }}
-  allowFullScreen
-  loading="lazy"
-  referrerPolicy="no-referrer-when-downgrade"
-/>
+          <iframe
+            title="Mazi's Taxi Location"
+            src="https://maps.google.com/maps?q=25+Danny+Lee+Walk+Hereford+HR4+7ST&output=embed"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </div>
     </section>

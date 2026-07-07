@@ -11,10 +11,8 @@ import './Footer.css'
 const Footer = () => {
   return (
     <footer className="footer">
-
       {/* TOP SECTION */}
       <div className="footer-top">
-
         {/* BRAND */}
         <div className="footer-brand">
           <div className="footer-logo">
@@ -28,7 +26,6 @@ const Footer = () => {
 
           {/* SOCIAL */}
           <div className="footer-social">
-
             <a
               href="https://www.facebook.com/tayyab.tayyab.9003"
               target="_blank"
@@ -48,14 +45,13 @@ const Footer = () => {
             </a>
 
             <a
-              href="https://wa.me/447311694905"
+              href="https://wa.me/447885843111"
               target="_blank"
               rel="noreferrer"
               className="social-icon whatsapp"
             >
               <FaWhatsapp />
             </a>
-
           </div>
         </div>
 
@@ -74,22 +70,21 @@ const Footer = () => {
         <div className="footer-col">
           <h4>Contact Us</h4>
           <ul>
-
             <li>
               <a
-                href="tel:+447311694905"
+                href="tel:+447885843111"
                 className="footer-contact-link"
               >
                 <div className="footer-icon-wrap phone-wrap">
                   <FaPhone />
                 </div>
-                +44 7311 694905
+                +44 7885 843111
               </a>
             </li>
 
             <li>
               <a
-                href="https://wa.me/447311694905"
+                href="https://wa.me/447885843111"
                 target="_blank"
                 rel="noreferrer"
                 className="footer-contact-link"
@@ -105,27 +100,27 @@ const Footer = () => {
               <div className="footer-icon-wrap loc-wrap">
                 <FaMapMarkerAlt />
               </div>
+
               <span>
-                7 Wincanton Close,<br />
-                Hereford, HR4 9TF
+                25 Danny Lee Walk,
+                <br />
+                Hereford, HR4 7ST
               </span>
             </li>
-
           </ul>
         </div>
-
       </div>
 
       {/* BOTTOM */}
       <div className="footer-bottom">
         <p>© 2025 Mazi's Taxi. All rights reserved.</p>
+
         <div className="footer-policy">
           <a href="#">Privacy Policy</a>
           <span>|</span>
           <a href="#">Terms & Conditions</a>
         </div>
       </div>
-
     </footer>
   )
 }

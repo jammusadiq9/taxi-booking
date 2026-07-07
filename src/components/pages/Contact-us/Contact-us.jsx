@@ -28,7 +28,7 @@ const Contact = () => {
     setError('')
 
     try {
-      await axios.post('http://localhost:5000/api/contact', formData)
+      await axios.post('https://test.mondabrothers.com/api/contact', formData)
       setSuccess(true)
       setFormData({ name: '', email: '', message: '' })
     } catch (err) {
