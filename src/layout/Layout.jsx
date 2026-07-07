@@ -36,18 +36,19 @@ const Layout = () => {
       <Outlet />
 
       <Footer />
-      {/* CALL BUTTON */}
 
- <a href="tel:+447311694905"
-  className="call-float"
-  title="Call Us"
->
-  <FaPhone />
-</a>
+      {/* CALL BUTTON */}
+      <a
+        href="tel:+447885843111"
+        className="call-float"
+        title="Call Us"
+      >
+        <FaPhone />
+      </a>
 
       {/* WHATSAPP FLOAT BUTTON */}
       <a
-        href="https://wa.me/447311694905"
+        href="https://wa.me/447885843111"
         target="_blank"
         rel="noreferrer"
         className="wa-float"
