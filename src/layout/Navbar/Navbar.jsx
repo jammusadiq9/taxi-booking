@@ -92,7 +92,7 @@ const Navbar = () => {
 
       <div className="navbar-right">
         <a
-          href="https://wa.me/447311694905"
+          href="https://wa.me/447885843111"
           target="_blank"
           rel="noreferrer"
           className="btn-whatsapp"
@@ -101,10 +101,10 @@ const Navbar = () => {
         </a>
 
         <a
-          href="tel:+447311694905"
+          href="tel:+447885843111"
           className="btn-phone"
         >
-          +44 7311 694905
+          +447885 843111
         </a>
       </div>
     </nav>

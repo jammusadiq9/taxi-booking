@@ -5,7 +5,7 @@ const faqs = [
   {
     id      : 1,
     question: 'How do I book a taxi?',
-    answer  : 'Booking is simple! Just fill in the booking form on our website with your journey details and we will confirm your ride shortly. You can also call or WhatsApp us directly on +44 7311 694905 and we will get you sorted right away.'
+    answer  : 'Booking is simple! Just fill in the booking form on our website with your journey details and we will confirm your ride shortly. You can also call or WhatsApp us directly on +44 7885 843111 and we will get you sorted right away.'
   },
   {
     id      : 2,
